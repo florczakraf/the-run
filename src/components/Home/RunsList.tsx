@@ -15,10 +15,9 @@ class RunsList extends React.Component<Props> {
 
     return (
       <View style={styles.container}>
-        {/* <Text style={styles.signLabel}>Available runs</Text> */}
         <Separator text="Available runs" />
 
-        <View style={styles.buttons}>{runs.map(this._renderCard)}</View>
+        {runs.map(this._renderCard)}
       </View>
     );
   }
@@ -31,9 +30,6 @@ const styles = StyleSheet.create({
   signLabel: {
     color: "#393939",
     fontSize: 20
-  },
-  buttons: {
-    marginBottom: 30
   }
 });
 

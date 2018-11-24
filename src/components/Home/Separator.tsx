@@ -18,12 +18,11 @@ const styles = StyleSheet.create({
   line: {
     position: "absolute",
     top: "50%",
-    height: 1,
+    height: 2,
     width: "100%",
-    backgroundColor: "#393939"
+    backgroundColor: "#000000"
   },
   text: {
-    color: "#393939",
     fontSize: 14,
     fontWeight: "500",
     backgroundColor: "#ffffff",

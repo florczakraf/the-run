@@ -16,7 +16,18 @@ const RunCard = ({ run, navigation }: Props) => (
     </View>
 
     <View style={styles.row}>
-      <MaterialCommunityIcons name="clock-outline" size={32} />
+      <View style={styles.rowInner}>
+        <MaterialCommunityIcons
+          name="clock-outline"
+          size={32}
+          color="#393939"
+        />
+        <Text style={styles.rowText}>12:00 -- 16:00</Text>
+      </View>
+      <View style={styles.rowInner}>
+        <MaterialCommunityIcons name="run" size={32} color="#393939" />
+        <Text style={styles.rowText}>{run.participantsCount} participants</Text>
+      </View>
     </View>
 
     <View style={styles.buttonContainer}>
@@ -37,7 +48,9 @@ const RunCard = ({ run, navigation }: Props) => (
 const styles = StyleSheet.create({
   container: {
     padding: 20,
-    backgroundColor: "#ecf0f1",
+    borderTopWidth: 10,
+    borderBottomWidth: 10,
+    borderColor: "#000000",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -54,10 +67,20 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: "row",
+    alignItems: "center",
     marginBottom: 20
   },
+  rowInner: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginRight: 20
+  },
+  rowText: {
+    marginLeft: 10,
+    fontSize: 15
+  },
   buttonContainer: {
-    marginTop: 30
+    marginTop: 10
   }
 });
 

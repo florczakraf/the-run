@@ -1,11 +1,9 @@
-import React from "react";
-import { StyleSheet, View, Text, ScrollView } from "react-native";
-import MainHeader from "@app/components/MainHeader";
-import RegisterButton from "@app/components/RegisterButton";
+import MainHeader from "@app/components/Home/MainHeader";
+import RunsList from "@app/components/Home/RunsList";
 import { availableRuns } from "@app/data";
+import React from "react";
+import { ScrollView, StyleSheet, View } from "react-native";
 import { NavigationScreenProp } from "react-navigation";
-
-const AVAILABLE_RUNS = availableRuns;
 
 interface Props {
   navigation: NavigationScreenProp<any>;
@@ -23,20 +21,7 @@ class HomeScreen extends React.Component<Props> {
           <MainHeader />
         </View>
 
-        <View style={styles.main}>
-          <Text style={styles.signLabel}>SIGN FOR</Text>
-
-          <View style={styles.buttons}>
-            <RegisterButton
-              title={AVAILABLE_RUNS[0].title}
-              navigateToDetails={() =>
-                this.props.navigation.navigate("RunDetails", {
-                  run: AVAILABLE_RUNS[0]
-                })
-              }
-            />
-          </View>
-        </View>
+        <RunsList runs={availableRuns} />
       </ScrollView>
     );
   }
@@ -47,19 +32,9 @@ const styles = StyleSheet.create({
     flex: 1
   },
   mainHeaderContainer: {
-    height: 300
+    height: 200
   },
-  main: {
-    padding: 20,
-    flex: 1
-  },
-  signLabel: {
-    color: "#393939",
-    fontSize: 20
-  },
-  buttons: {
-    marginVertical: 30
-  }
+  main: {}
 });
 
 export default HomeScreen;

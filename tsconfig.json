@@ -13,7 +13,6 @@
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "sourceMap": false, // Something else (Babel?) is creating the necessary source maps.
-    "strict": true,
     "target": "es2017",
     "paths": {
       "@app/*": ["src/*"]

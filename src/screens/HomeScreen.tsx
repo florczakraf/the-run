@@ -1,10 +1,14 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, ScrollView } from "react-native";
 import MainHeader from "@app/components/MainHeader";
 import RegisterButton from "@app/components/RegisterButton";
+import { availableRuns } from "@app/data";
+import { NavigationScreenProp } from "react-navigation";
+
+const AVAILABLE_RUNS = availableRuns;
 
 interface Props {
-  navigation: any;
+  navigation: NavigationScreenProp<any>;
 }
 
 class HomeScreen extends React.Component<Props> {
@@ -14,7 +18,7 @@ class HomeScreen extends React.Component<Props> {
 
   render() {
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <View style={styles.mainHeaderContainer}>
           <MainHeader />
         </View>
@@ -24,13 +28,16 @@ class HomeScreen extends React.Component<Props> {
 
           <View style={styles.buttons}>
             <RegisterButton
+              title={AVAILABLE_RUNS[0].title}
               navigateToDetails={() =>
-                this.props.navigation.navigate("RunDetails")
+                this.props.navigation.navigate("RunDetails", {
+                  run: AVAILABLE_RUNS[0]
+                })
               }
             />
           </View>
         </View>
-      </View>
+      </ScrollView>
     );
   }
 }

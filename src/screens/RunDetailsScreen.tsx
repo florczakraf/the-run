@@ -1,11 +1,19 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
+import { NavigationScreenProp } from "react-navigation";
 
-class RunDetailsScreen extends React.Component {
+interface Props {
+  navigation: NavigationScreenProp<any>;
+}
+
+class RunDetailsScreen extends React.Component<Props> {
   render() {
+    const run: RunInfo = this.props.navigation.getParam("run");
+
     return (
       <View style={styles.container}>
         <View style={styles.mapContainer} />
+        <Text>{run.title}</Text>
       </View>
     );
   }

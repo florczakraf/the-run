@@ -17,7 +17,7 @@ const HomeStack = createStackNavigator(
     }
   },
   {
-    initialRouteName: "Run",
+    initialRouteName: "Home",
     initialRouteParams: { run: availableRuns[0] },
     headerMode: "screen"
   }

@@ -1,9 +1,14 @@
 import React from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { NavigationScreenProp } from "react-navigation";
-import { MaterialCommunityIcons, FontAwesome } from "@expo/vector-icons";
+import {
+  MaterialCommunityIcons,
+  MaterialIcons,
+  FontAwesome
+} from "@expo/vector-icons";
 import { MapView } from "expo";
 import Colors from "@app/theme";
+import RoundButton from "@app/components/Home/RoundButton";
 
 interface Props {
   navigation: NavigationScreenProp<any>;
@@ -60,11 +65,11 @@ class RunDetailsScreen extends React.Component<Props> {
         </View>
 
         <View style={styles.buttonContainer}>
-          <TouchableOpacity onPress={() => this.props.navigation.pop()}>
-            <View style={styles.payButton}>
-              <Text style={styles.payButtonText}>Pay & sign up</Text>
-            </View>
-          </TouchableOpacity>
+          <RoundButton
+            icon={<MaterialIcons name="payment" size={24} color="#ffffff" />}
+            onPress={() => this.props.navigation.pop()}
+            title="Pay & sign up"
+          />
         </View>
       </View>
     );
@@ -99,15 +104,6 @@ const styles = StyleSheet.create({
     position: "absolute",
     width: "100%",
     bottom: 20
-  },
-  payButton: {
-    padding: 10,
-    alignItems: "center",
-    backgroundColor: "#000000",
-    borderRadius: 6
-  },
-  payButtonText: {
-    color: "#ffffff"
   }
 });
 

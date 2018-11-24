@@ -73,7 +73,7 @@ const theRun = new Game("The Run", inSixMinutes, 10, 6, 2.5, 500);
 const games = {
   [theRun.id]: theRun
 };
-const players = {};
+let players = {};
 
 function gamesInfo() {
   return Object.entries(games).map(([_, game]) => game.gameInfo());
@@ -114,7 +114,7 @@ function handleLocationHistory(player, msg) {
 function handleDisconnect(player) {
   try {
     handleDrop(player, { gameId: player.gameId });
-  } catch {}
+  } catch (error) {}
 }
 
 io.on("connection", function(client) {
@@ -124,7 +124,7 @@ io.on("connection", function(client) {
   client.on("locationHistory", msg =>
     handleLocationHistory(client.player, msg)
   );
-  client.on("disconnect", handleDisconnect(client.player));
+  client.on("disconnect", () => handleDisconnect(client.player));
   client.on("error", function(error) {
     console.log("error from client:", client.id);
     console.log(error);

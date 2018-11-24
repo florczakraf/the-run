@@ -71,6 +71,7 @@ class RunMap extends React.Component {
   render = () => (
     <MapView
       style={{ flex: 1 }}
+      provider={MapView.PROVIDER_GOOGLE}
       initialRegion={{
         latitude: 52.22977,
         longitude: 21.011788,

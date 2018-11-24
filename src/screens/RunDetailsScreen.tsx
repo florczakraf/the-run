@@ -21,6 +21,7 @@ class RunDetailsScreen extends React.Component<Props> {
         <View style={styles.mapContainer}>
           <MapView
             style={{ flex: 1 }}
+            provider={MapView.PROVIDER_GOOGLE}
             initialRegion={{
               latitude: 52.22977,
               longitude: 21.011788,

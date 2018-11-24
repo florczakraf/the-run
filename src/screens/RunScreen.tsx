@@ -1,16 +1,34 @@
 import React from "react";
-import { MapView } from "expo";
+import { StyleSheet, View, Button } from "react-native";
+import RunMap from "@app/components/RunMap";
+import RunStatus from "@app/components/RunStatus";
 
 const RunScreen = () => (
-  <MapView
-    style={{ flex: 1 }}
-    initialRegion={{
-      latitude: 52.22977,
-      longitude: 21.011788,
-      latitudeDelta: 0.002,
-      longitudeDelta: 0.002
-    }}
-  />
+  <View style={styles.container}>
+    <RunStatus participants="35" countdown="453" />
+    <RunMap />
+    <Button onPress={() => {}} title="Confirm Position" />
+  </View>
 );
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
+  mainHeaderContainer: {
+    height: 300
+  },
+  main: {
+    padding: 20,
+    flex: 1
+  },
+  signLabel: {
+    color: "#393939",
+    fontSize: 20
+  },
+  buttons: {
+    margin: 10
+  }
+});
 
 export default RunScreen;

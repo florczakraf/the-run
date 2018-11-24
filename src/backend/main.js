@@ -103,14 +103,28 @@ function handleDrop(player, msg) {
   game.drop(player);
 }
 
+function handleLocationHistory(player, msg) {
+  player.locationHistory = {
+    ...player.locationHistory,
+    ...msg.locationHistory
+  };
+  // todo validate whether target was visited
+}
+
+function handleDisconnect(player) {
+  try {
+    handleDrop(player, { gameId: player.gameId });
+  } catch {}
+}
+
 io.on("connection", function(client) {
   client.on("handshake", msg => handleHandshake(client, msg));
   client.on("join", msg => handleJoin(client.player, msg));
   client.on("drop", msg => handleDrop(client.player, msg));
-  //   client.on("locationHistory", handleLocationHistory);
-
-  //   client.on("disconnect", handleDisconnect(client));
-
+  client.on("locationHistory", msg =>
+    handleLocationHistory(client.player, msg)
+  );
+  client.on("disconnect", handleDisconnect(client.player));
   client.on("error", function(error) {
     console.log("error from client:", client.id);
     console.log(error);

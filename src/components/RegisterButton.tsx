@@ -1,18 +1,21 @@
 import React from "react";
-import { StyleSheet, TouchableOpacity, Text } from "react-native";
+import { StyleSheet, TouchableOpacity, Text, View } from "react-native";
 
 const RegisterButton = () => (
-  <TouchableOpacity style={styles.container}>
-    <Text style={styles.buttonText}>The main run</Text>
+  <TouchableOpacity>
+    <View style={styles.container}>
+      <Text style={styles.buttonText}>The Main run</Text>
+    </View>
   </TouchableOpacity>
 );
 
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    padding: 20,
+    padding: 10,
     backgroundColor: "purple",
-    borderRadius: 20
+    borderRadius: 10,
+    alignItems: "center"
   },
   buttonText: {
     fontSize: 20,

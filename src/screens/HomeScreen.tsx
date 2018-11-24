@@ -10,7 +10,7 @@ const HelloScreen = () => (
     </View>
 
     <View style={styles.main}>
-      <Text style={styles.signLabel}>Sign for</Text>
+      <Text style={styles.signLabel}>SIGN FOR</Text>
 
       <View style={styles.buttons}>
         <RegisterButton />
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     fontSize: 20
   },
   buttons: {
-    margin: 10
+    marginVertical: 30
   }
 });
 

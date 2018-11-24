@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
+    "importHelpers": true,
+    "jsx": "react-native",
+    "lib": [
+      "es2017"
+    ],
+    "module": "es2015",
+    "moduleResolution": "node",
+    "noEmit": true,
+    "noEmitHelpers": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "sourceMap": false, // Something else (Babel?) is creating the necessary source maps.
+    "strict": true,
+    "target": "es2017",
+    "paths": {
+      "@app/*": ["src/*"]
+    },
+    "baseUrl": "."
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}

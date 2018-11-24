@@ -13,11 +13,13 @@
     "@types/expo__vector-icons": "^6.2.3",
     "@types/react-navigation": "^2.13.4",
     "@types/socket.io": "^2.1.0",
+    "@types/socket.io-client": "^1.4.32",
     "expo": "^31.0.2",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz",
     "react-navigation": "^3.0.0",
     "socket.io": "^2.1.1",
+    "socket.io-client": "^2.1.1",
     "tslib": "^1.9.3",
     "typescript": "^3.1.6"
   },

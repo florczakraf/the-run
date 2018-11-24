@@ -1,22 +1,40 @@
 import MainHeader from "@app/components/Home/MainHeader";
 import RunsList from "@app/components/Home/RunsList";
-import { availableRuns } from "@app/data";
 import React from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { NavigationScreenProp } from "react-navigation";
 import { defaultNavigationOptions } from "@app/navigation/defaults";
+import { SocketService } from "@app/services/SocketService";
 
 interface Props {
   navigation: NavigationScreenProp<any>;
 }
 
-class HomeScreen extends React.Component<Props> {
+interface State {
+  availableRuns: RunInfo[];
+}
+
+class HomeScreen extends React.Component<Props, State> {
   static navigationOptions = {
     ...defaultNavigationOptions,
     header: null
   };
 
+  state = {
+    availableRuns: []
+  };
+
+  componentDidMount() {
+    SocketService.init(this._onGamesChange);
+  }
+
+  _onGamesChange = (games: RunInfo[]) => {
+    this.setState({ availableRuns: games });
+  };
+
   render() {
+    const { availableRuns } = this.state;
+
     return (
       <ScrollView style={styles.container}>
         <View style={styles.mainHeaderContainer}>

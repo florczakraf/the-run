@@ -11,6 +11,8 @@ import Colors from "@app/theme";
 import RoundButton from "@app/components/Home/RoundButton";
 import { defaultNavigationOptions } from "@app/navigation/defaults";
 import Separator from "@app/components/Home/Separator";
+import { format } from "date-fns";
+import { SocketService } from "@app/services/SocketService";
 
 interface Props {
   navigation: NavigationScreenProp<any>;
@@ -19,8 +21,15 @@ interface Props {
 class RunDetailsScreen extends React.Component<Props> {
   static navigationOptions = ({ navigation }) => ({
     ...defaultNavigationOptions,
-    title: navigation.state.params.run.title
+    title: navigation.state.params.run.name
   });
+
+  _signUp = () => {
+    const run: RunInfo = this.props.navigation.getParam("run");
+
+    SocketService.joinGame(run.id);
+    this.props.navigation.pop();
+  };
 
   render() {
     const run: RunInfo = this.props.navigation.getParam("run");
@@ -48,7 +57,10 @@ class RunDetailsScreen extends React.Component<Props> {
               size={32}
               color={Colors.primary}
             />
-            <Text style={styles.infoText}>Starts at 12:00am</Text>
+            <Text style={styles.infoText}>
+              {format(run.startTime, "H:mm")} –{" "}
+              {format(run.startTime + run.duration, "H:mm")}
+            </Text>
           </View>
 
           <View style={styles.info}>
@@ -57,21 +69,21 @@ class RunDetailsScreen extends React.Component<Props> {
               size={32}
               color={Colors.primary}
             />
-            <Text style={styles.infoText}>
-              {run.participantsCount} participants
-            </Text>
+            <Text style={styles.infoText}>{run.players} participants</Text>
           </View>
 
           <View style={styles.info}>
             <FontAwesome name="ticket" size={32} color={Colors.primary} />
-            <Text style={styles.infoText}>{run.price}$ ticket cost</Text>
+            <Text style={styles.infoText}>
+              {run.entryFee.toFixed(2)}$ ticket cost
+            </Text>
           </View>
         </View>
 
         <View style={styles.buttonContainer}>
           <RoundButton
             icon={<MaterialIcons name="payment" size={24} color="#ffffff" />}
-            onPress={() => this.props.navigation.pop()}
+            onPress={this._signUp}
             title="Pay & sign up"
           />
         </View>

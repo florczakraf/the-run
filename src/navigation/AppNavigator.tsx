@@ -2,7 +2,7 @@ import { createStackNavigator, createAppContainer } from "react-navigation";
 import HomeScreen from "@app/screens/HomeScreen";
 import RunDetailsScreen from "@app/screens/RunDetailsScreen";
 import RunScreen from "@app/screens/RunScreen";
-import { availableRuns } from "@app/data";
+// import { availableRuns } from "@app/data";
 
 const HomeStack = createStackNavigator(
   {
@@ -18,7 +18,7 @@ const HomeStack = createStackNavigator(
   },
   {
     initialRouteName: "Home",
-    initialRouteParams: { run: availableRuns[0] },
+    // initialRouteParams: { run: availableRuns[0] },
     headerMode: "screen"
   }
 );

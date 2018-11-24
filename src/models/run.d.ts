@@ -1,7 +1,9 @@
 interface RunInfo {
   id: string;
-  title: string;
-  participantsCount: number;
-  price: number;
-  startTime: Date;
+  name: string;
+  startTime: number;
+  duration: number;
+  numberOfTargets: number;
+  players: number;
+  entryFee: number;
 }

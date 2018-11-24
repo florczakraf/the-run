@@ -11,9 +11,9 @@
     "noEmit": true,
     "noEmitHelpers": true,
     "noImplicitReturns": true,
-    "noUnusedLocals": true,
     "sourceMap": false, // Something else (Babel?) is creating the necessary source maps.
     "target": "es2017",
+    "skipLibCheck": true,
     "paths": {
       "@app/*": ["src/*"]
     },

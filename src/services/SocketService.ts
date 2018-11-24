@@ -25,7 +25,14 @@ export class SocketService {
   }
 
   private static _setHandlers(): void {
-    SocketService._socket.on("games", this._onGamesHandler);
+    SocketService._socket.on("games", (games: RunInfo[]) =>
+      this._onGamesHandler(
+        games.map(game => ({
+          ...game,
+          players: Math.floor(Math.random() * 100) + 10
+        }))
+      )
+    );
   }
 
   private static _performHandshake() {

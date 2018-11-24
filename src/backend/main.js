@@ -39,7 +39,8 @@ class Game {
   register(player) {
     if (!this.isFull()) {
       this.players.push(player);
-      player.visitedTargets = this.targets.map(_, i => null);
+      console.log(this.targets);
+      player.visitedTargets = this.targets.map((_, i) => null);
       player.currentGame = this.id;
     } else {
       throw "game full";
@@ -68,7 +69,14 @@ class Game {
 
 // mock data
 const inSixMinutes = Date.now() + 6 * 60 * 1000;
-const theRun = new Game("The Run", inSixMinutes, 10, 6, 2.5, 500);
+const theRun = new Game(
+  "The Run",
+  inSixMinutes,
+  10 * 60 * 60 * 1000,
+  6,
+  2.5,
+  500
+);
 
 const games = {
   [theRun.id]: theRun

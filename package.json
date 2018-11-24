@@ -1,6 +1,6 @@
 {
   "name": "empty-project-template",
-  "main": "index.expo.js",
+  "main": "node_modules/expo/AppEntry.js",
   "private": true,
   "scripts": {
     "start": "expo start",

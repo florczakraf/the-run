@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import HelloScreen from "./screens/HomeScreen";
+import HelloScreen from "./src/screens/HomeScreen";
 
 export default class App extends React.Component {
   render() {

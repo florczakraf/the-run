@@ -4,6 +4,7 @@ import { availableRuns } from "@app/data";
 import React from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { NavigationScreenProp } from "react-navigation";
+import { defaultNavigationOptions } from "@app/navigation/defaults";
 
 interface Props {
   navigation: NavigationScreenProp<any>;
@@ -11,6 +12,7 @@ interface Props {
 
 class HomeScreen extends React.Component<Props> {
   static navigationOptions = {
+    ...defaultNavigationOptions,
     header: null
   };
 

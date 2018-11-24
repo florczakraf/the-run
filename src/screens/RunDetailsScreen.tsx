@@ -9,6 +9,8 @@ import {
 import { MapView } from "expo";
 import Colors from "@app/theme";
 import RoundButton from "@app/components/Home/RoundButton";
+import { defaultNavigationOptions } from "@app/navigation/defaults";
+import Separator from "@app/components/Home/Separator";
 
 interface Props {
   navigation: NavigationScreenProp<any>;
@@ -16,6 +18,7 @@ interface Props {
 
 class RunDetailsScreen extends React.Component<Props> {
   static navigationOptions = ({ navigation }) => ({
+    ...defaultNavigationOptions,
     title: navigation.state.params.run.title
   });
 
@@ -37,6 +40,7 @@ class RunDetailsScreen extends React.Component<Props> {
             }}
           />
         </View>
+        <Separator text="Run details" />
         <View style={styles.detailsContainer}>
           <View style={styles.info}>
             <MaterialCommunityIcons
@@ -85,18 +89,18 @@ const styles = StyleSheet.create({
     height: "40%"
   },
   detailsContainer: {
-    paddingVertical: 24,
+    paddingBottom: 24,
     paddingHorizontal: 12
   },
   info: {
     flexDirection: "row",
-    padding: 10,
-    marginBottom: 10
+    alignItems: "center",
+    padding: 10
   },
   infoText: {
     marginLeft: 12,
-    color: "#393939",
-    fontSize: 24,
+    color: "#000000",
+    fontSize: 16,
     fontWeight: "500"
   },
   buttonContainer: {

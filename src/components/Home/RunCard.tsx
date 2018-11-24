@@ -20,12 +20,12 @@ const RunCard = ({ run, navigation }: Props) => (
         <MaterialCommunityIcons
           name="clock-outline"
           size={32}
-          color="#393939"
+          // color="#393939"
         />
         <Text style={styles.rowText}>12:00 -- 16:00</Text>
       </View>
       <View style={styles.rowInner}>
-        <MaterialCommunityIcons name="run" size={32} color="#393939" />
+        <MaterialCommunityIcons name="run" size={32} />
         <Text style={styles.rowText}>{run.participantsCount} participants</Text>
       </View>
     </View>

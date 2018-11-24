@@ -3,13 +3,21 @@ import { StyleSheet, View, Button } from "react-native";
 import RunMap from "@app/components/RunMap";
 import RunStatus from "@app/components/RunStatus";
 
-const RunScreen = () => (
-  <View style={styles.container}>
-    <RunStatus participants="35" countdown="453" />
-    <RunMap />
-    <Button onPress={() => {}} title="Confirm Position" />
-  </View>
-);
+class RunScreen extends React.Component {
+  static navigationOptions = {
+    header: null
+  };
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <RunStatus participants="35" countdown="453" />
+        <RunMap />
+        <Button onPress={() => {}} title="Confirm Position" />
+      </View>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   container: {

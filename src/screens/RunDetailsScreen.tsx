@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { NavigationScreenProp } from "react-navigation";
 import { MaterialCommunityIcons, FontAwesome } from "@expo/vector-icons";
 import { MapView } from "expo";
+import Colors from "@app/theme";
 
 interface Props {
   navigation: NavigationScreenProp<any>;
@@ -21,6 +22,7 @@ class RunDetailsScreen extends React.Component<Props> {
         <View style={styles.mapContainer}>
           <MapView
             style={{ flex: 1 }}
+            showUserLocation={true}
             provider={MapView.PROVIDER_GOOGLE}
             initialRegion={{
               latitude: 52.22977,
@@ -35,26 +37,30 @@ class RunDetailsScreen extends React.Component<Props> {
             <MaterialCommunityIcons
               name="clock-outline"
               size={32}
-              color="purple"
+              color={Colors.primary}
             />
             <Text style={styles.infoText}>Starts at 12:00am</Text>
           </View>
 
           <View style={styles.info}>
-            <MaterialCommunityIcons name="run" size={32} color="purple" />
+            <MaterialCommunityIcons
+              name="run"
+              size={32}
+              color={Colors.primary}
+            />
             <Text style={styles.infoText}>
               {run.participantsCount} participants
             </Text>
           </View>
 
           <View style={styles.info}>
-            <FontAwesome name="ticket" size={32} color="purple" />
+            <FontAwesome name="ticket" size={32} color={Colors.primary} />
             <Text style={styles.infoText}>{run.price}$ ticket cost</Text>
           </View>
         </View>
 
         <View style={styles.buttonContainer}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => this.props.navigation.pop()}>
             <View style={styles.payButton}>
               <Text style={styles.payButtonText}>Pay & sign up</Text>
             </View>

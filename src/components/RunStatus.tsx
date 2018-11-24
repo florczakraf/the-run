@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
+import Colors from "@app/theme";
 
 const RunStatus = props => (
   <View style={styles.container}>
@@ -10,7 +11,7 @@ const RunStatus = props => (
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "purple",
+    backgroundColor: Colors.primary,
     justifyContent: "center",
     alignItems: "center",
     width: "100%",

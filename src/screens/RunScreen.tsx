@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, View, Button } from "react-native";
 import RunMap from "@app/components/RunMap";
 import RunStatus from "@app/components/RunStatus";
+import { Constants } from "expo";
 
 class RunScreen extends React.Component {
   static navigationOptions = {
@@ -21,7 +22,8 @@ class RunScreen extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    paddingTop: Constants.statusBarHeight
   },
   mainHeaderContainer: {
     height: 300

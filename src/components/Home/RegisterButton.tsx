@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, TouchableOpacity, Text, View } from "react-native";
+import Colors from "@app/theme";
 
 interface Props {
   title: string;
@@ -18,7 +19,7 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     padding: 10,
-    backgroundColor: "purple",
+    backgroundColor: Colors.primary,
     borderRadius: 10,
     alignItems: "center",
     shadowColor: "#000",

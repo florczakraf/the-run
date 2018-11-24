@@ -26,7 +26,7 @@ class RunsList extends React.Component<Props> {
 
     return (
       <View style={styles.container}>
-        <Text style={styles.signLabel}>SIGN FOR</Text>
+        <Text style={styles.signLabel}>Available runs</Text>
 
         <View style={styles.buttons}>{runs.map(this._renderButton)}</View>
       </View>

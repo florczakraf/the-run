@@ -1,8 +1,6 @@
-import React from 'react';
-import { Text } from 'react-native';
+import React from "react";
+import { Text } from "react-native";
 
-const Hello = () => (
-  <Text>HELLO DO KURVY</Text>
-);
+const Hello = () => <Text>HELLO DO KURVY2</Text>;
 
 export default Hello;

@@ -24,7 +24,9 @@ class HomeScreen extends React.Component<Props> {
 
           <View style={styles.buttons}>
             <RegisterButton
-              navigateToDetails={this.props.navigation.navigate("RunDetails")}
+              navigateToDetails={() =>
+                this.props.navigation.navigate("RunDetails")
+              }
             />
           </View>
         </View>

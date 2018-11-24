@@ -1,6 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import HomeScreen from "./src/screens/HomeScreen";
+import { StyleSheet, View } from "react-native";
 import AppNavigator from "@app/navigation/AppNavigator";
 import { Constants } from "expo";
 

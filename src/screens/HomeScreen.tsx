@@ -3,21 +3,35 @@ import { StyleSheet, View, Text } from "react-native";
 import MainHeader from "@app/components/MainHeader";
 import RegisterButton from "@app/components/RegisterButton";
 
-const HelloScreen = () => (
-  <View style={styles.container}>
-    <View style={styles.mainHeaderContainer}>
-      <MainHeader />
-    </View>
+interface Props {
+  navigation: any;
+}
 
-    <View style={styles.main}>
-      <Text style={styles.signLabel}>SIGN FOR</Text>
+class HomeScreen extends React.Component<Props> {
+  static navigationOptions = {
+    header: null
+  };
 
-      <View style={styles.buttons}>
-        <RegisterButton />
+  render() {
+    return (
+      <View style={styles.container}>
+        <View style={styles.mainHeaderContainer}>
+          <MainHeader />
+        </View>
+
+        <View style={styles.main}>
+          <Text style={styles.signLabel}>SIGN FOR</Text>
+
+          <View style={styles.buttons}>
+            <RegisterButton
+              navigateToDetails={this.props.navigation.navigate("RunDetails")}
+            />
+          </View>
+        </View>
       </View>
-    </View>
-  </View>
-);
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -39,4 +53,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default HelloScreen;
+export default HomeScreen;

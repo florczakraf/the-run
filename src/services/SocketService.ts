@@ -9,7 +9,7 @@ export class SocketService {
     _onGamesHandler: typeof SocketService._onGamesHandler,
     _onGameStartedHandler: typeof SocketService._onGameStartedHandler
   ) {
-    SocketService._socket = io.connect("http://172.20.10.4:3000");
+    SocketService._socket = io.connect("http://10.250.161.199:3000");
     SocketService._onGamesHandler = _onGamesHandler;
     SocketService._onGameStartedHandler = _onGameStartedHandler;
 

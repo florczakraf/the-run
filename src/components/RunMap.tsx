@@ -29,8 +29,12 @@ class RunMap extends React.Component<Props> {
           longitudeDelta: 0.232
         }}
       >
-        {this.props.targets.map((marker, i) => (
-          <MapView.Marker coordinate={marker} key={i} />
+        {visitedPositions.map((marker, i) => (
+          <MapView.Marker coordinate={marker} key={i} color="#2ecc71" />
+        ))}
+
+        {notVisitedPositions.map((marker, i) => (
+          <MapView.Marker coordinate={marker} key={i} color="#e74c3c" />
         ))}
 
         {this.props.location ? (

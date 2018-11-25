@@ -29,7 +29,7 @@ class RunScreen extends React.Component<Props> {
       locationAccuracy: null,
       hasPermissions: false,
       run: run,
-      visitedTargets: [],
+      visitedTargets: new Array(run.numberOfTargets).fill(null),
       targets: run.targets
     };
   }
@@ -85,6 +85,7 @@ class RunScreen extends React.Component<Props> {
           location={this.state.location}
           targets={this.state.targets}
           accuracy={this.state.locationAccuracy}
+          visitedTargets={this.state.visitedTargets}
         />
         {/* <Button onPress={() => {}} title="Confirm Position" /> */}
       </View>

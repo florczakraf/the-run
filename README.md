@@ -14,6 +14,8 @@ The bar was set quite high because there were only two of us and neither had any
 
 ## Media
 
+https://www.youtube.com/watch?v=Mj-NujdGCcQ
+
 <img src="misc/home.png" width="200">
 <img src="misc/run-details.png" width="200">
 <img src="misc/home2.png" width="200">
@@ -27,6 +29,7 @@ The bar was set quite high because there were only two of us and neither had any
 ## Development
 
 ```
+# you might want to tweak the address in `src/services/SocketService.ts`
 yarn
 yarn run backend&
 yarn start

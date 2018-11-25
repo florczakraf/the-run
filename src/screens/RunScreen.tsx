@@ -53,7 +53,7 @@ class RunScreen extends React.Component<Props> {
     const distance = getDistance({ ...this.state.location }, { ...target });
     const step = distance / STEPS;
     const bearing = getBearing({ ...this.state.location }, { ...target });
-    const DELAY = 2000;
+    const DELAY = 1000;
 
     const points = new Array(STEPS)
       .fill(0)

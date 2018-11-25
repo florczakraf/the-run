@@ -8,9 +8,10 @@ import { format } from "date-fns";
 interface Props {
   run: RunInfo;
   navigation?: NavigationScreenProp<any>;
+  onSignUp: (id: string) => void;
 }
 
-const RunCard = ({ run, navigation }: Props) => (
+const RunCard = ({ run, navigation, onSignUp }: Props) => (
   <View style={styles.container}>
     <View style={styles.row}>
       <Text style={styles.title}>{run.name}</Text>
@@ -41,7 +42,8 @@ const RunCard = ({ run, navigation }: Props) => (
         icon={<Feather name="edit-2" color="#ffffff" size={24} />}
         onPress={() =>
           navigation.navigate("RunDetails", {
-            run
+            run,
+            onSignUp
           })
         }
       />

@@ -7,8 +7,22 @@ interface Props {
   runs: RunInfo[];
 }
 
-class RunsList extends React.Component<Props> {
-  _renderCard = (run: RunInfo) => <RunCard run={run} key={run.id} />;
+interface State {
+  signedIn: string[];
+}
+
+class RunsList extends React.Component<Props, State> {
+  state = {
+    signedIn: []
+  };
+
+  _signUp = (id: string) => {
+    this.setState(state => ({ signedIn: [...state.signedIn, id] }));
+  };
+
+  _renderCard = (run: RunInfo) => (
+    <RunCard run={run} key={run.id} onSignUp={this._signUp} />
+  );
 
   render() {
     const { runs } = this.props;

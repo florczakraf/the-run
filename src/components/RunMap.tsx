@@ -32,42 +32,13 @@ const someMarkers = [
   }
 ];
 
-class RunMap extends React.Component {
-  state = {
-    hasPermissions: false,
-    location: null
-  };
+interface Props {
+  targets: { latitude: number; longitude: number }[];
+  location: any;
+  accuracy: number;
+}
 
-  componentDidMount() {
-    this._getLocation();
-  }
-
-  _getLocation = async () => {
-    let { status } = await Permissions.askAsync(Permissions.LOCATION);
-    if (status !== "granted") {
-      this.setState({
-        location: null
-      });
-    } else {
-      this.setState({ hasPermissions: true });
-    }
-
-    let location = await Location.getCurrentPositionAsync({}); // TODO this or server? extract to method
-    setTimeout(() => {
-      this.setState({ location: location["coords"] });
-    }, 3000);
-
-    // TODO follow player on map? run on timer or socket data?
-    // this.setState({
-    //   mapRegion: {
-    //     latitude: location.coords.latitude,
-    //     longitude: location.coords.longitude,
-    //     latitudeDelta: 0.0022,
-    //     longitudeDelta: 0.0021
-    //   }
-    // });
-  };
-
+class RunMap extends React.Component<Props> {
   render = () => (
     <MapView
       style={{ flex: 1 }}
@@ -83,11 +54,20 @@ class RunMap extends React.Component {
         <MapView.Marker coordinate={marker} key={i} />
       ))}
 
-      {this.state.location ? (
+      {this.props.location ? (
         <MapView.Marker
-          coordinate={this.state.location}
+          coordinate={this.props.location}
           key="player"
           pinColor="blue"
+        />
+      ) : null}
+      {this.props.accuracy ? (
+        <MapView.Circle
+          center={this.props.location}
+          radius={this.props.accuracy}
+          strikeWidth={2}
+          strokeColor="#2980b9"
+          fillColor="#3498db"
         />
       ) : null}
     </MapView>

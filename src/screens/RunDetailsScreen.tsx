@@ -28,6 +28,7 @@ class RunDetailsScreen extends React.Component<Props> {
     const run: RunInfo = this.props.navigation.getParam("run");
 
     SocketService.joinGame(run.id);
+    this.props.navigation.getParam("onSignUp");
     this.props.navigation.pop();
   };
 

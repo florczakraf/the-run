@@ -176,7 +176,7 @@ function handleDisconnect(player) {
 function handleVisitTarget(player, msg) {
   player.visitedTargets[msg] = Date.now();
   if (player.visitedTargets.every(x => !!x)) {
-    games[player.gameId].winners.push(player.id);
+    games[player.currentGame].winners.push(player.id);
   }
 }
 

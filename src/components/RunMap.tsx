@@ -17,7 +17,7 @@ class RunMap extends React.Component<Props> {
 
   componentWillReceiveProps(props: Props) {
     if (props.location) {
-      this.locationValue.timing(props.location, 500).start();
+      this.locationValue.timing(props.location, 1000).start();
     }
   }
 

@@ -26,7 +26,7 @@ class RunMap extends React.Component<Props> {
           latitude: 52.22977,
           longitude: 21.011788,
           latitudeDelta: 0.002,
-          longitudeDelta: 0.232
+          longitudeDelta: 0.142
         }}
       >
         {visitedPositions.map((marker, i) => (

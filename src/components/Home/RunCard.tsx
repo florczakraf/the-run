@@ -46,7 +46,7 @@ const RunCard = ({ run, navigation, onSignUp, signedUp }: Props) => (
         <RoundButton
           invert={true}
           color="#2ecc71"
-          title="You are already signed"
+          title="You are in!"
           icon={<Feather name="check" color="#2ecc71" size={24} />}
           onPress={() => {}}
         />

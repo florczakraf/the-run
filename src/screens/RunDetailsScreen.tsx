@@ -87,9 +87,7 @@ class RunDetailsScreen extends React.Component<Props> {
 
           <View style={styles.info}>
             <FontAwesome name="ticket" size={32} color={Colors.primary} />
-            <Text style={styles.infoText}>
-              {run.entryFee.toFixed(2)}$ ticket cost
-            </Text>
+            <Text style={styles.infoText}>${run.entryFee.toFixed(2)}</Text>
           </View>
 
           <View style={styles.descriptionContainer}>

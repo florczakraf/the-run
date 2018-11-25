@@ -22,7 +22,7 @@ class Game {
     this.players = [];
     this.targets = this.generateTargets(numberOfTargets);
     this.id = name + startTime;
-    this.started = false;
+    this.active = false;
   }
 
   hasEnded() {
@@ -68,15 +68,18 @@ class Game {
   }
 
   start() {
-    if (!this.started) {
+    if (!this.active) {
       this.players.map(p => {
         p.client.emit("gameStarted", { gameId: this.id });
       });
-      this.started = true;
+      this.active = true;
     }
   }
 
-  summarize() {}
+  summarize() {
+    this.active = false;
+    // todo send summary about winners
+  }
 }
 
 // mock data
@@ -162,6 +165,9 @@ server.listen(3000, function(error) {
 
 function tick() {
   Object.entries(games).map(([_, game]) => {
+    if (!game.active) {
+      return;
+    }
     game.players
       .filter(p => !p.finished())
       .map(p =>
@@ -170,6 +176,10 @@ function tick() {
           visitedTargets: p.visitedTargets()
         })
       );
+
+    if (game.hasEnded()) {
+      game.summarize();
+    }
   });
 }
 

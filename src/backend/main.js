@@ -73,7 +73,7 @@ class Game {
   }
 
   start() {
-    if (!this.active) {
+    if (!this.active || true) {
       console.log("startuje i jade po ziomkach");
       this.players.map(p => {
         p.client.emit("gameStarted", {
@@ -103,7 +103,7 @@ const theRun = new Game(
   "The Run",
   "Can you prove that you are the champion of the urban jungle? No holds barred.",
   inOneMinute,
-  10 * 60 * 60 * 1000,
+  60 * 60 * 1000,
   6,
   2.5,
   500
@@ -114,7 +114,7 @@ const topTen = new Game(
   "For runners only",
   "No risk no fun! Compete with nine other people for higher stake.",
   in23Minutes,
-  10 * 60 * 60 * 1000,
+  60 * 60 * 1000,
   5,
   20,
   10
@@ -185,6 +185,7 @@ io.on("connection", function(client) {
   client.on("join", msg => handleJoin(client.player, msg));
   client.on("drop", msg => handleDrop(client.player, msg));
   client.on("visitTarget", msg => handleVisitTarget(client.player, msg));
+  client.on("startGame", msg => games[msg.gameId].start());
   client.on("locationHistory", msg =>
     handleLocationHistory(client.player, msg)
   );

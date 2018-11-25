@@ -33,6 +33,10 @@ export class SocketService {
     SocketService._socket.emit("locationHistory", location);
   }
 
+  static startGameXD(gameId: string) {
+    SocketService._socket.emit("startGame", { gameId });
+  }
+
   private static _setHandlers(): void {
     SocketService._socket.on("games", this._onGamesHandler);
     SocketService._socket.on("gameStarted", this._onGameStartedHandler);

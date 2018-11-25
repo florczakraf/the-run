@@ -2,13 +2,12 @@ import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 import Colors from "@app/theme";
 import { BlurView } from "expo";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons, Feather, Ionicons } from "@expo/vector-icons";
 import { msToMMSS } from "@app/utils/helpers";
 
 interface Props {
-  runStats: any;
   run: RunInfo;
-  participants: number;
+  visitedTargets: number[];
 }
 
 interface State {
@@ -45,7 +44,16 @@ export default class RunStatus extends React.Component<Props, State> {
           <MaterialCommunityIcons name="clock-outline" size={22} />
           <Text style={styles.text}>{msToMMSS(this.state.timeLeft)}</Text>
         </View>
-        <Text style={styles.text}>Participants: {this.props.participants}</Text>
+        <View style={styles.information}>
+          <Feather name="map-pin" size={22} />
+          <Text style={styles.text}>{`${
+            this.props.visitedTargets.filter(v => v).length
+          } / ${this.props.run.numberOfTargets}`}</Text>
+        </View>
+        <View style={styles.information}>
+          <Ionicons name="md-podium" size={22} />
+          <Text style={styles.text}>{this.props.run.finished + 1}</Text>
+        </View>
       </BlurView>
     );
   }

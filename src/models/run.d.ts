@@ -7,6 +7,7 @@ interface RunInfo {
   players: number;
   entryFee: number;
   description: string;
+  finished: number;
 }
 
 interface Stats extends RunInfo {

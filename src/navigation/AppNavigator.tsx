@@ -2,6 +2,7 @@ import { createStackNavigator, createAppContainer } from "react-navigation";
 import HomeScreen from "@app/screens/HomeScreen";
 import RunDetailsScreen from "@app/screens/RunDetailsScreen";
 import RunScreen from "@app/screens/RunScreen";
+import SummaryScreen from "@app/screens/SummaryScreen";
 // import { availableRuns } from "@app/data";
 
 const HomeStack = createStackNavigator(
@@ -14,6 +15,9 @@ const HomeStack = createStackNavigator(
     },
     Run: {
       screen: RunScreen
+    },
+    Summary: {
+      screen: SummaryScreen
     }
   },
   {

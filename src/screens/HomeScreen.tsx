@@ -35,17 +35,20 @@ class HomeScreen extends React.Component<Props, State> {
   };
 
   _onGameStarted = (game: RunInfo) => {
-    this.props.navigation.navigate("Run", game);
+    this.props.navigation.navigate("Run", { run: game });
   };
 
   _signUp = (id: string) => {
     const updatedRuns = this.state.availableRuns.map(run =>
       run.id === id ? { ...run, players: run.players + 1 } : run
     );
+
     this.setState(state => ({
       signedIn: [...state.signedIn, id],
       availableRuns: updatedRuns
     }));
+
+    SocketService.startGameXD(id);
   };
 
   render() {

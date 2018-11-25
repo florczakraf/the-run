@@ -6,21 +6,33 @@ import { Constants, Permissions, Location } from "expo";
 import { availableRuns } from "@app/data";
 import { EventSubscription } from "fbemitter";
 import { SocketService } from "@app/services/SocketService";
+import { NavigationScreenProp } from "react-navigation";
 
-class RunScreen extends React.Component {
+interface Props {
+  navigation: NavigationScreenProp<any>;
+}
+
+class RunScreen extends React.Component<Props> {
   static navigationOptions = {
     header: null
   };
 
   private _locationListener: EventSubscription;
 
-  state = {
-    location: null,
-    locationAccuracy: null,
-    hasPermissions: false,
-    run: null,
-    visitedTargets: []
-  };
+  constructor(props: Props) {
+    super(props);
+
+    const run = this.props.navigation.getParam("run");
+
+    this.state = {
+      location: null,
+      locationAccuracy: null,
+      hasPermissions: false,
+      run: run,
+      visitedTargets: [],
+      targets: run.targets
+    };
+  }
 
   async componentDidMount() {
     SocketService.setStatsHandler(this._onNewStats);
@@ -40,7 +52,6 @@ class RunScreen extends React.Component {
 
   _onNewLocation = ({ coords, timestamp }: Location.LocationData) => {
     const { longitude, latitude, accuracy } = coords;
-    // SocketService.sendLocation({ longitude, latitude });
     this.setState({ location: { longitude, latitude }, accuracy });
   };
 
@@ -65,11 +76,14 @@ class RunScreen extends React.Component {
       <View style={styles.container}>
         <View style={styles.statusBarBackground} />
         <View style={styles.runStatusContainer}>
-          <RunStatus participants={35} run={availableRuns[0]} runStats={null} />
+          <RunStatus
+            run={this.state.run}
+            visitedTargets={this.state.visitedTargets}
+          />
         </View>
         <RunMap
           location={this.state.location}
-          targets={[]}
+          targets={this.state.targets}
           accuracy={this.state.locationAccuracy}
         />
         {/* <Button onPress={() => {}} title="Confirm Position" /> */}

@@ -18,7 +18,7 @@ export class SocketService {
   }
 
   static setStatsHandler(_onStatsHandler: (stats: Stats) => void) {
-    SocketService._socket.on("state", _onStatsHandler);
+    SocketService._socket.on("stats", _onStatsHandler);
   }
 
   static joinGame(gameId: string) {
@@ -35,6 +35,10 @@ export class SocketService {
 
   static startGameXD(gameId: string) {
     SocketService._socket.emit("startGame", { gameId });
+  }
+
+  static visitTarget(id: string) {
+    SocketService._socket.emit("visitTarget", id);
   }
 
   private static _setHandlers(): void {

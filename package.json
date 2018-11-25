@@ -11,11 +11,13 @@
   },
   "dependencies": {
     "@types/expo__vector-icons": "^6.2.3",
+    "@types/geolib": "^2.0.23",
     "@types/react-navigation": "^2.13.4",
     "@types/socket.io": "^2.1.0",
     "@types/socket.io-client": "^1.4.32",
     "date-fns": "^1.29.0",
     "expo": "^31.0.2",
+    "geolib": "^2.0.24",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz",
     "react-navigation": "^3.0.0",

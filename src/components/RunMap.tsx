@@ -1,5 +1,6 @@
 import React from "react";
 import { MapView, Permissions, Location } from "expo";
+import { Animated } from "react-native";
 
 interface Props {
   targets: { latitude: number; longitude: number }[];
@@ -9,6 +10,17 @@ interface Props {
 }
 
 class RunMap extends React.Component<Props> {
+  locationValue = new MapView.AnimatedRegion({
+    latitude: 52.22977,
+    longitude: 21.011788
+  });
+
+  componentWillReceiveProps(props: Props) {
+    if (props.location) {
+      this.locationValue.timing(props.location, 500).start();
+    }
+  }
+
   render = () => {
     const visitedPositions = this.props.visitedTargets
       .map((timestamp, i) => (timestamp ? this.props.targets[i] : null))
@@ -38,8 +50,8 @@ class RunMap extends React.Component<Props> {
         ))}
 
         {this.props.location ? (
-          <MapView.Marker
-            coordinate={this.props.location}
+          <MapView.Marker.Animated
+            coordinate={this.locationValue}
             key="player"
             pinColor="rgb(52,152,219)"
           />

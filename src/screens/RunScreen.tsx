@@ -7,6 +7,7 @@ import { availableRuns } from "@app/data";
 import { EventSubscription } from "fbemitter";
 import { SocketService } from "@app/services/SocketService";
 import { NavigationScreenProp } from "react-navigation";
+import { computeDestinationPoint, getBearing, getDistance } from "geolib";
 
 interface Props {
   navigation: NavigationScreenProp<any>;
@@ -25,7 +26,7 @@ class RunScreen extends React.Component<Props> {
     const run = this.props.navigation.getParam("run");
 
     this.state = {
-      location: null,
+      location: { latitude: 52.22977, longitude: 21.011788 },
       locationAccuracy: null,
       hasPermissions: false,
       run: run,
@@ -33,17 +34,46 @@ class RunScreen extends React.Component<Props> {
       targets: run.targets
     };
 
-    this.state.visitedTargets[1] = Date.now();
+    setTimeout(() => this._performWalk(0), 3000);
   }
 
   async componentDidMount() {
     SocketService.setStatsHandler(this._onNewStats);
 
-    await this._getLocationPermission();
-    this._locationListener = Location.watchPositionAsync(
-      { enableHighAccuracy: true, timeInterval: 3000 },
-      this._onNewLocation
-    );
+    // await this._getLocationPermission();
+    // this._locationListener = Location.watchPositionAsync(
+    //   { enableHighAccuracy: true, timeInterval: 3000 },
+    //   this._onNewLocation
+    // );
+  }
+
+  _performWalk(targetIndex) {
+    const STEPS = 5;
+    const target = this.state.targets[targetIndex];
+    const distance = getDistance({ ...this.state.location }, { ...target });
+    const step = distance / STEPS;
+    const bearing = getBearing({ ...this.state.location }, { ...target });
+    const DELAY = 500;
+
+    const points = new Array(STEPS)
+      .fill(0)
+      .map((_, i) =>
+        computeDestinationPoint(
+          { ...this.state.location },
+          step * (i + 1),
+          bearing
+        )
+      );
+    for (let i = 0; i < points.length; i++) {
+      const point = points[i];
+      setTimeout(() => this._onNewLocation({ coords: point }), DELAY * i);
+    }
+
+    setTimeout(() => SocketService.visitTarget(targetIndex), DELAY * STEPS);
+
+    if (targetIndex < this.state.targets.length - 1) {
+      setTimeout(() => this._performWalk(targetIndex + 1), DELAY * STEPS);
+    }
   }
 
   componentWillUnmount() {

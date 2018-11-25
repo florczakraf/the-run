@@ -141,7 +141,7 @@ function handleHandshake(client, msg) {
     finished: () => {
       this.currentGame &&
         this.visitedTargets &&
-        Array.every(this.visitedTargets);
+        this.visitedTargets.every(x => !!x);
     }
   };
   client.player = player;
@@ -174,8 +174,8 @@ function handleDisconnect(player) {
 }
 
 function handleVisitTarget(player, msg) {
-  player.visitedTargets[msg] = date.now();
-  if (Array.every(player.visitedTargets)) {
+  player.visitedTargets[msg] = Date.now();
+  if (player.visitedTargets.every(x => !!x)) {
     games[player.gameId].winners.push(player.id);
   }
 }

@@ -8,3 +8,7 @@ interface RunInfo {
   entryFee: number;
   description: string;
 }
+
+interface Stats extends RunInfo {
+  visitedTargets: number[];
+}

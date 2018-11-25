@@ -74,6 +74,7 @@ class Game {
 
   start() {
     if (!this.active) {
+      console.log("startuje i jade po ziomkach");
       this.players.map(p => {
         p.client.emit("gameStarted", {
           ...this.gameInfo(),
@@ -97,7 +98,7 @@ class Game {
 }
 
 // mock data
-const inOneMinute = Date.now() + 60 * 1000;
+const inOneMinute = Date.now() + 30 * 1000;
 const theRun = new Game(
   "The Run",
   "Can you prove that you are the champion of the urban jungle? No holds barred.",
@@ -202,7 +203,7 @@ server.listen(3000, function(error) {
 function tick() {
   Object.entries(games).map(([_, game]) => {
     if (!game.active) {
-      if (game.startTime >= Date.now()) {
+      if (game.startTime <= Date.now()) {
         game.start();
       } else {
         return; // game is dead now, could it be removed?

@@ -17,10 +17,14 @@ class RunScreen extends React.Component {
   state = {
     location: null,
     locationAccuracy: null,
-    hasPermissions: false
+    hasPermissions: false,
+    run: null,
+    visitedTargets: []
   };
 
   async componentDidMount() {
+    SocketService.setStatsHandler(this._onNewStats);
+
     await this._getLocationPermission();
     this._locationListener = Location.watchPositionAsync(
       { enableHighAccuracy: true, timeInterval: 3000 },
@@ -50,6 +54,11 @@ class RunScreen extends React.Component {
       this.setState({ hasPermissions: true });
     }
   }
+
+  _onNewStats = (stats: Stats) => {
+    const { visitedTargets, ...run } = stats;
+    this.setState({ visitedTargets, run });
+  };
 
   render() {
     return (

@@ -17,6 +17,10 @@ export class SocketService {
     SocketService._performHandshake();
   }
 
+  static setStatsHandler(_onStatsHandler: (stats: Stats) => void) {
+    SocketService._socket.on("state", _onStatsHandler);
+  }
+
   static joinGame(gameId: string) {
     SocketService._socket.emit("join", { gameId });
   }

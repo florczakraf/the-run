@@ -8,6 +8,7 @@ const targets = JSON.parse(contents);
 class Game {
   constructor(
     name, // string
+    description, // string
     startTime, // timestamp
     duration, // minutes
     numberOfTargets, // int
@@ -17,6 +18,7 @@ class Game {
     this.startTime = startTime;
     this.duration = duration;
     this.name = name;
+    this.description = description;
     this.entryFee = entryFee;
     this.maxParticipants = maxParticipants;
     this.players = [];
@@ -59,10 +61,12 @@ class Game {
     return {
       id: this.id,
       name: this.name,
+      description: this.description,
       startTime: this.startTime,
       duration: this.duration,
       numberOfTargets: this.targets.length,
       players: this.players.length,
+      finished: this.players.filter(p => p.finished()).length,
       entryFee: this.entryFee
     };
   }
@@ -70,7 +74,7 @@ class Game {
   start() {
     if (!this.active) {
       this.players.map(p => {
-        p.client.emit("gameStarted", { gameId: this.id });
+        p.client.emit("gameStarted", this.gameInfo());
       });
       this.active = true;
     }
@@ -86,6 +90,7 @@ class Game {
 const inSixMinutes = Date.now() + 6 * 60 * 1000;
 const theRun = new Game(
   "The Run",
+  "Can you prove that you are the champion of the urban jungle? No holds barred.",
   inSixMinutes,
   10 * 60 * 60 * 1000,
   6,
@@ -93,8 +98,20 @@ const theRun = new Game(
   500
 );
 
+const in23Minutes = Date.now() + 23 * 60 * 1000;
+const topTen = new Game(
+  "Top Ten",
+  "No risk no fun! Compete with nine other people for higher stake.",
+  in23Minutes,
+  10 * 60 * 60 * 1000,
+  5,
+  20,
+  10
+);
+
 const games = {
-  [theRun.id]: theRun
+  [theRun.id]: theRun,
+  [topTen.id]: topTen
 };
 let players = {};
 

@@ -22,6 +22,7 @@ class Game {
     this.players = [];
     this.targets = this.generateTargets(numberOfTargets);
     this.id = name + startTime;
+    this.started = false;
   }
 
   hasEnded() {
@@ -65,6 +66,17 @@ class Game {
       entryFee: this.entryFee
     };
   }
+
+  start() {
+    if (!this.started) {
+      this.players.map(p => {
+        p.client.emit("gameStarted", { gameId: this.id });
+      });
+      this.started = true;
+    }
+  }
+
+  summarize() {}
 }
 
 // mock data
@@ -94,7 +106,11 @@ function handleHandshake(client, msg) {
     client, // socket
     locationHistory: [], // timestamp -> coords?
     currentGame: null, // game.id str
-    visitedTargets: {} // timestamps for each target
+    visitedTargets: {}, // timestamps for each target
+    finished: () => {
+      currentGame &&
+        Array.every(Object.entries(visitedTargets).map(([_, time]) => time));
+    }
   };
   client.player = player;
   players = { ...players, [id]: player };
@@ -143,3 +159,18 @@ server.listen(3000, function(error) {
   if (error) throw error;
   console.log("started on port 3000");
 });
+
+function tick() {
+  Object.entries(games).map(([_, game]) => {
+    game.players
+      .filter(p => !p.finished())
+      .map(p =>
+        p.client.emit("stats", {
+          ...game.gameInfo(),
+          visitedTargets: p.visitedTargets()
+        })
+      );
+  });
+}
+
+setInterval(tick, 500);

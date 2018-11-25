@@ -21,7 +21,12 @@ class RunsList extends React.Component<Props, State> {
   };
 
   _renderCard = (run: RunInfo) => (
-    <RunCard run={run} key={run.id} onSignUp={this._signUp} />
+    <RunCard
+      run={run}
+      key={run.id}
+      onSignUp={this._signUp}
+      signedUp={this.state.signedIn.includes(run.id)}
+    />
   );
 
   render() {

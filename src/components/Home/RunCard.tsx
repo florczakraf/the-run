@@ -9,12 +9,16 @@ interface Props {
   run: RunInfo;
   navigation?: NavigationScreenProp<any>;
   onSignUp: (id: string) => void;
+  signedUp: boolean;
 }
 
-const RunCard = ({ run, navigation, onSignUp }: Props) => (
+const RunCard = ({ run, navigation, onSignUp, signedUp }: Props) => (
   <View style={styles.container}>
     <View style={styles.row}>
       <Text style={styles.title}>{run.name}</Text>
+      {signedUp ? (
+        <Text style={[styles.startsSoon]}>will start soon...</Text>
+      ) : null}
     </View>
 
     <View style={styles.row}>
@@ -36,17 +40,26 @@ const RunCard = ({ run, navigation, onSignUp }: Props) => (
     </View>
 
     <View style={styles.buttonContainer}>
-      <RoundButton
-        key={run.id}
-        title="Sign Up"
-        icon={<Feather name="edit-2" color="#ffffff" size={24} />}
-        onPress={() =>
-          navigation.navigate("RunDetails", {
-            run,
-            onSignUp
-          })
-        }
-      />
+      {signedUp ? (
+        <RoundButton
+          invert={true}
+          color="#2ecc71"
+          title="You are already signed"
+          icon={<Feather name="check" color="#2ecc71" size={24} />}
+          onPress={() => {}}
+        />
+      ) : (
+        <RoundButton
+          title="Sign Up"
+          icon={<Feather name="edit-2" color="#ffffff" size={24} />}
+          onPress={() =>
+            navigation.navigate("RunDetails", {
+              run,
+              onSignUp
+            })
+          }
+        />
+      )}
     </View>
   </View>
 );
@@ -70,6 +83,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     color: "#000000"
+  },
+  startsSoon: {
+    fontSize: 20,
+    color: "#2ecc71",
+    marginLeft: 8,
+    marginTop: 3
   },
   row: {
     flexDirection: "row",

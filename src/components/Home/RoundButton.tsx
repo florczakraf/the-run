@@ -4,16 +4,29 @@ import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
 const RoundButton = ({
   onPress,
   title,
-  icon
+  icon,
+  invert,
+  color
 }: {
   onPress: () => void;
   title: string;
   icon?: any;
+  invert?: boolean;
+  color?: string;
 }) => (
   <TouchableOpacity onPress={onPress}>
-    <View style={styles.payButton}>
+    <View
+      style={[
+        styles.payButton,
+        invert
+          ? { backgroundColor: "#ffffff", borderColor: color, borderWidth: 3 }
+          : null
+      ]}
+    >
       <View style={styles.iconContainer}>{icon}</View>
-      <Text style={styles.payButtonText}>{title.toUpperCase()}</Text>
+      <Text style={[styles.payButtonText, invert ? { color } : null]}>
+        {title.toUpperCase()}
+      </Text>
     </View>
   </TouchableOpacity>
 );

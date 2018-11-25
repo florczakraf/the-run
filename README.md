@@ -21,8 +21,8 @@ The bar was set quite high because there were only two of us and neither had any
 
 ## Authors
 
-- Dominik Rabij GH: [jamOne-](https://github.com/jamOne-)
-- Rafał Florczak GH: [florczak.raf](https://github.com/florczak.raf)
+- [Dominik Rabij](https://github.com/jamOne-)
+- [Rafał Florczak](https://github.com/florczakraf)
 
 ## Development
 

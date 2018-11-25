@@ -14,6 +14,11 @@ import Separator from "@app/components/Home/Separator";
 import { format } from "date-fns";
 import { SocketService } from "@app/services/SocketService";
 
+const POSITION = {
+  latitude: 52.22977,
+  longitude: 21.011788
+};
+
 interface Props {
   navigation: NavigationScreenProp<any>;
 }
@@ -43,12 +48,19 @@ class RunDetailsScreen extends React.Component<Props> {
             showUserLocation={true}
             provider={MapView.PROVIDER_GOOGLE}
             initialRegion={{
-              latitude: 52.22977,
-              longitude: 21.011788,
+              ...POSITION,
               latitudeDelta: 0.002,
               longitudeDelta: 0.232
             }}
-          />
+          >
+            <MapView.Circle
+              center={POSITION}
+              radius={4000}
+              strokeWidth={2}
+              strokeColor="rgba(41,128,185, 0.5)"
+              fillColor="rgba(52,152,219, 0.5)"
+            />
+          </MapView>
         </View>
         <Separator text="Run details" />
         <View style={styles.detailsContainer}>

@@ -5,27 +5,17 @@ import Separator from "./Separator";
 
 interface Props {
   runs: RunInfo[];
-}
-
-interface State {
   signedIn: string[];
+  onSignUp: (id: string) => void;
 }
 
-class RunsList extends React.Component<Props, State> {
-  state = {
-    signedIn: []
-  };
-
-  _signUp = (id: string) => {
-    this.setState(state => ({ signedIn: [...state.signedIn, id] }));
-  };
-
+class RunsList extends React.Component<Props> {
   _renderCard = (run: RunInfo) => (
     <RunCard
       run={run}
       key={run.id}
-      onSignUp={this._signUp}
-      signedUp={this.state.signedIn.includes(run.id)}
+      onSignUp={this.props.onSignUp}
+      signedUp={this.props.signedIn.includes(run.id)}
     />
   );
 

@@ -6,4 +6,5 @@ interface RunInfo {
   numberOfTargets: number;
   players: number;
   entryFee: number;
+  description: string;
 }

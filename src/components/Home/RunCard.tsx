@@ -13,7 +13,9 @@ interface Props {
 }
 
 const RunCard = ({ run, navigation, onSignUp, signedUp }: Props) => (
-  <View style={styles.container}>
+  <View
+    style={[styles.container, signedUp ? { borderColor: "#2ecc71" } : null]}
+  >
     <View style={styles.row}>
       <Text style={styles.title}>{run.name}</Text>
       {signedUp ? (

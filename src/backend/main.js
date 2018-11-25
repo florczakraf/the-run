@@ -110,7 +110,7 @@ const theRun = new Game(
 
 const in23Minutes = Date.now() + 23 * 60 * 1000;
 const topTen = new Game(
-  "Top Ten",
+  "For runners only",
   "No risk no fun! Compete with nine other people for higher stake.",
   in23Minutes,
   10 * 60 * 60 * 1000,

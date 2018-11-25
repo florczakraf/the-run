@@ -91,6 +91,10 @@ class RunDetailsScreen extends React.Component<Props> {
               {run.entryFee.toFixed(2)}$ ticket cost
             </Text>
           </View>
+
+          <View style={styles.descriptionContainer}>
+            <Text style={styles.description}>{run.description}</Text>
+          </View>
         </View>
 
         <View style={styles.buttonContainer}>
@@ -133,6 +137,25 @@ const styles = StyleSheet.create({
     position: "absolute",
     width: "100%",
     bottom: 20
+  },
+  descriptionContainer: {
+    width: "100%",
+    padding: 10,
+    backgroundColor: "#000000",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1
+    },
+    shadowOpacity: 0.18,
+    shadowRadius: 1.0,
+
+    elevation: 1,
+    borderRadius: 6
+  },
+  description: {
+    color: "#ffffff",
+    fontSize: 15
   }
 });
 

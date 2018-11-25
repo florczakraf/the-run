@@ -12,6 +12,7 @@ interface Props {
 
 interface State {
   availableRuns: RunInfo[];
+  signedIn: string[];
 }
 
 class HomeScreen extends React.Component<Props, State> {
@@ -21,7 +22,8 @@ class HomeScreen extends React.Component<Props, State> {
   };
 
   state = {
-    availableRuns: []
+    availableRuns: [] as RunInfo[],
+    signedIn: [] as string[]
   };
 
   componentDidMount() {
@@ -36,6 +38,16 @@ class HomeScreen extends React.Component<Props, State> {
     this.props.navigation.navigate("Run", game);
   };
 
+  _signUp = (id: string) => {
+    const updatedRuns = this.state.availableRuns.map(run =>
+      run.id === id ? { ...run, players: run.players + 1 } : run
+    );
+    this.setState(state => ({
+      signedIn: [...state.signedIn, id],
+      availableRuns: updatedRuns
+    }));
+  };
+
   render() {
     const { availableRuns } = this.state;
 
@@ -45,7 +57,11 @@ class HomeScreen extends React.Component<Props, State> {
           <MainHeader />
         </View>
 
-        <RunsList runs={availableRuns} />
+        <RunsList
+          runs={availableRuns}
+          onSignUp={this._signUp}
+          signedIn={this.state.signedIn}
+        />
       </ScrollView>
     );
   }

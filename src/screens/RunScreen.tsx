@@ -32,6 +32,8 @@ class RunScreen extends React.Component<Props> {
       visitedTargets: new Array(run.numberOfTargets).fill(null),
       targets: run.targets
     };
+
+    this.state.visitedTargets[1] = Date.now();
   }
 
   async componentDidMount() {

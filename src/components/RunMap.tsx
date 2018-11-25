@@ -30,11 +30,11 @@ class RunMap extends React.Component<Props> {
         }}
       >
         {visitedPositions.map((marker, i) => (
-          <MapView.Marker coordinate={marker} key={i} color="#2ecc71" />
+          <MapView.Marker coordinate={marker} key={i} pinColor="#2ecc71" />
         ))}
 
         {notVisitedPositions.map((marker, i) => (
-          <MapView.Marker coordinate={marker} key={i} color="#e74c3c" />
+          <MapView.Marker coordinate={marker} key={i} pinColor="#e74c3c" />
         ))}
 
         {this.props.location ? (

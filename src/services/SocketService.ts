@@ -21,6 +21,10 @@ export class SocketService {
     SocketService._socket.on("stats", _onStatsHandler);
   }
 
+  static setSummaryHandler(_onSummaryHandler: (summary: Summary) => void) {
+    SocketService._socket.on("summary", _onSummaryHandler);
+  }
+
   static joinGame(gameId: string) {
     SocketService._socket.emit("join", { gameId });
   }

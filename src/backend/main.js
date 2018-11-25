@@ -86,12 +86,15 @@ class Game {
   }
 
   summarize() {
-    this.active = false;
+    // this.active = false;
     this.players.map(p => {
+      console.log("Emit summary ziomeczQ");
+
       p.client.emit("summary", {
         winners: this.winners, // array of ids of players who finished the game in the ascending order
         visitedTargets: p.visitedTargets, // times per target, null if not visited,
-        targets: this.targets // array of coords for targets
+        targets: this.targets, // array of coords for targets,
+        players: this.players.length
       });
     });
   }
@@ -177,6 +180,7 @@ function handleVisitTarget(player, msg) {
   player.visitedTargets[msg] = Date.now();
   if (player.visitedTargets.every(x => !!x)) {
     games[player.currentGame].winners.push(player.id);
+    player.client.emit("summary", games[player.currentGame].summarize());
   }
 }
 
@@ -220,6 +224,7 @@ function tick() {
       );
 
     if (game.hasEnded()) {
+      game.active = false;
       game.summarize();
     }
   });

@@ -13,3 +13,10 @@ interface RunInfo {
 interface Stats extends RunInfo {
   visitedTargets: number[];
 }
+
+interface Summary {
+  winners: string[];
+  visitedTargets: any[];
+  targets: any[];
+  players: number;
+}

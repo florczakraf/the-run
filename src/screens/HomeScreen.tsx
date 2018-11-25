@@ -48,7 +48,7 @@ class HomeScreen extends React.Component<Props, State> {
       availableRuns: updatedRuns
     }));
 
-    SocketService.startGameXD(id);
+    setTimeout(() => SocketService.startGameXD(id), 3000);
   };
 
   render() {

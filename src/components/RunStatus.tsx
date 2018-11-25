@@ -41,10 +41,6 @@ export default class RunStatus extends React.Component<Props, State> {
     return (
       <BlurView tint="light" intensity={50} style={styles.container}>
         <View style={styles.information}>
-          <MaterialCommunityIcons name="clock-outline" size={22} />
-          <Text style={styles.text}>{msToMMSS(this.state.timeLeft)}</Text>
-        </View>
-        <View style={styles.information}>
           <Feather name="map-pin" size={22} />
           <Text style={styles.text}>{`${
             this.props.visitedTargets.filter(v => v).length
@@ -53,6 +49,10 @@ export default class RunStatus extends React.Component<Props, State> {
         <View style={styles.information}>
           <Ionicons name="md-podium" size={22} />
           <Text style={styles.text}>{this.props.run.finished + 1}</Text>
+        </View>
+        <View style={styles.information}>
+          <MaterialCommunityIcons name="clock-outline" size={22} />
+          <Text style={styles.text}>{msToMMSS(this.state.timeLeft)}</Text>
         </View>
       </BlurView>
     );

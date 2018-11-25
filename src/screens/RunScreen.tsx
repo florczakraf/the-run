@@ -39,6 +39,7 @@ class RunScreen extends React.Component<Props> {
 
   async componentDidMount() {
     SocketService.setStatsHandler(this._onNewStats);
+    SocketService.setSummaryHandler(this._onSummary);
 
     // await this._getLocationPermission();
     // this._locationListener = Location.watchPositionAsync(
@@ -46,6 +47,10 @@ class RunScreen extends React.Component<Props> {
     //   this._onNewLocation
     // );
   }
+
+  _onSummary = (summary: Summary) => {
+    this.props.navigation.navigate("Summary", { summary });
+  };
 
   _performWalk(targetIndex) {
     const STEPS = 5;

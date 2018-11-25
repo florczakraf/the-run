@@ -3,10 +3,15 @@ import * as io from "socket.io-client";
 export class SocketService {
   private static _socket: SocketIOClient.Socket;
   private static _onGamesHandler: (games: RunInfo[]) => void;
+  private static _onGameStartedHandler: (game: RunInfo) => void;
 
-  static init(_onGamesHandler: typeof SocketService._onGamesHandler) {
+  static init(
+    _onGamesHandler: typeof SocketService._onGamesHandler,
+    _onGameStartedHandler: typeof SocketService._onGameStartedHandler
+  ) {
     SocketService._socket = io.connect("http://172.20.10.4:3000");
     SocketService._onGamesHandler = _onGamesHandler;
+    SocketService._onGameStartedHandler = _onGameStartedHandler;
 
     SocketService._setHandlers();
     SocketService._performHandshake();
@@ -25,14 +30,8 @@ export class SocketService {
   }
 
   private static _setHandlers(): void {
-    SocketService._socket.on("games", (games: RunInfo[]) =>
-      this._onGamesHandler(
-        games.map(game => ({
-          ...game,
-          players: Math.floor(Math.random() * 100) + 10
-        }))
-      )
-    );
+    SocketService._socket.on("games", this._onGamesHandler);
+    SocketService._socket.on("gameStarted", this._onGameStartedHandler);
   }
 
   private static _performHandshake() {

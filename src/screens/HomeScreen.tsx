@@ -25,11 +25,15 @@ class HomeScreen extends React.Component<Props, State> {
   };
 
   componentDidMount() {
-    SocketService.init(this._onGamesChange);
+    SocketService.init(this._onGamesChange, this._onGameStarted);
   }
 
   _onGamesChange = (games: RunInfo[]) => {
     this.setState({ availableRuns: games });
+  };
+
+  _onGameStarted = (game: RunInfo) => {
+    this.props.navigation.navigate("Run", game);
   };
 
   render() {

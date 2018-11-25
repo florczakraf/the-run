@@ -9,7 +9,7 @@ export default class SummaryScreen extends React.Component {
 
   render() {
     const summary: Summary = this.props.navigation.getParam("summary") || {
-      players: 101
+      players: 73
     };
 
     return (

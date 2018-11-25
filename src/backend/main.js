@@ -161,10 +161,15 @@ function handleDisconnect(player) {
   } catch (error) {}
 }
 
+function handleVisitTarget(player, msg) {
+  player.visitedTargets[msg] = date.now();
+}
+
 io.on("connection", function(client) {
   client.on("handshake", msg => handleHandshake(client, msg));
   client.on("join", msg => handleJoin(client.player, msg));
   client.on("drop", msg => handleDrop(client.player, msg));
+  client.on("visitTarget", msg => handleVisitTarget(client.player, msg));
   client.on("locationHistory", msg =>
     handleLocationHistory(client.player, msg)
   );

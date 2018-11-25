@@ -87,11 +87,11 @@ class Game {
 }
 
 // mock data
-const inSixMinutes = Date.now() + 6 * 60 * 1000;
+const inOneMinute = Date.now() + 60 * 1000;
 const theRun = new Game(
   "The Run",
   "Can you prove that you are the champion of the urban jungle? No holds barred.",
-  inSixMinutes,
+  inOneMinute,
   10 * 60 * 60 * 1000,
   6,
   2.5,
@@ -188,7 +188,11 @@ server.listen(3000, function(error) {
 function tick() {
   Object.entries(games).map(([_, game]) => {
     if (!game.active) {
-      return;
+      if (game.startTime >= Date.now()) {
+        game.start();
+      } else {
+        return; // game is dead now, could it be removed?
+      }
     }
     game.players
       .filter(p => !p.finished())

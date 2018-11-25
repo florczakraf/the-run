@@ -25,6 +25,7 @@ class Game {
     this.targets = this.generateTargets(numberOfTargets);
     this.id = name + startTime;
     this.active = false;
+    this.winners = [];
   }
 
   hasEnded() {
@@ -74,7 +75,10 @@ class Game {
   start() {
     if (!this.active) {
       this.players.map(p => {
-        p.client.emit("gameStarted", this.gameInfo());
+        p.client.emit("gameStarted", {
+          ...this.gameInfo(),
+          targets: this.targets
+        });
       });
       this.active = true;
     }
@@ -82,7 +86,13 @@ class Game {
 
   summarize() {
     this.active = false;
-    // todo send summary about winners
+    this.players.map(p => {
+      p.client.emit("summary", {
+        winners: this.winners, // array of ids of players who finished the game in the ascending order
+        visitedTargets: p.visitedTargets, // times per target, null if not visited,
+        targets: this.targets // array of coords for targets
+      });
+    });
   }
 }
 
@@ -164,6 +174,9 @@ function handleDisconnect(player) {
 
 function handleVisitTarget(player, msg) {
   player.visitedTargets[msg] = date.now();
+  if (Array.every(player.visitedTargets)) {
+    games[player.gameId].winners.push(player.id);
+  }
 }
 
 io.on("connection", function(client) {

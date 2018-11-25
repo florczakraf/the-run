@@ -43,7 +43,7 @@ class Game {
     if (!this.isFull()) {
       this.players.push(player);
       console.log(this.targets);
-      player.visitedTargets = this.targets.map((_, i) => null);
+      player.visitedTargets = this.targets.map(() => null);
       player.currentGame = this.id;
     } else {
       throw "game full";
@@ -52,8 +52,8 @@ class Game {
 
   drop(player) {
     player.currentGame = null;
-    visitedTargets = {};
-    locationHistory = {};
+    player.visitedTargets = [];
+    player.locationHistory = {};
     this.players = this.players.filter(p => p != player);
   }
 
@@ -126,10 +126,11 @@ function handleHandshake(client, msg) {
     client, // socket
     locationHistory: [], // timestamp -> coords?
     currentGame: null, // game.id str
-    visitedTargets: {}, // timestamps for each target
+    visitedTargets: [], // timestamps for each target
     finished: () => {
-      currentGame &&
-        Array.every(Object.entries(visitedTargets).map(([_, time]) => time));
+      this.currentGame &&
+        this.visitedTargets &&
+        Array.every(this.visitedTargets);
     }
   };
   client.player = player;
@@ -199,7 +200,7 @@ function tick() {
       .map(p =>
         p.client.emit("stats", {
           ...game.gameInfo(),
-          visitedTargets: p.visitedTargets()
+          visitedTargets: p.visitedTargets
         })
       );
 
